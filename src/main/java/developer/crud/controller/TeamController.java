@@ -1,9 +1,11 @@
 package developer.crud.controller;
 
 import developer.crud.model.Team;
+import developer.crud.model.TeamStatus;
 import developer.crud.service.TeamService;
 
 import java.util.List;
+import java.util.Map;
 
 public class TeamController {
 
@@ -21,16 +23,14 @@ public class TeamController {
         return service.readAll();
     }
 
-    public void delete(Long id) {
-        service.delete(id);
+    public int delete(Long id) {
+        return service.delete(id);
     }
 
-    public void update(Long id, String name) {
-        service.update(id, name);
+    public void update(Long id, String name, int statusIndex) {
+        service.update(id, name, statusIndex);
     }
 
-    public void create(String name) {
-        service.create(name);
-    }
+    public void create(String name, int statusIndex) { service.create(name, statusIndex);}
 
 }

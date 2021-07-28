@@ -23,7 +23,8 @@ public class TeamRepositoryImpl implements TeamRepository{
             team.setName(resultSet.getString("name"));
             team.setStatus(TeamStatus.valueOf(resultSet.getString("status")));
         } catch (Exception ex) {
-            sout
+            System.out.println(ex.getMessage());
+
         }
         return team;
     }
@@ -55,17 +56,15 @@ public class TeamRepositoryImpl implements TeamRepository{
         String sql = "insert into team(name, status) values(?, ?)";
         return template.update(sql, new Object[] {
                 model.getName(),
-                model.getStatus().name(),
-                model.getId()
+                model.getStatus().name()
         });
     }
 
     @Override
-    public int delete(Team model) throws Exception {
+    public int delete(Long id) throws Exception {
+        System.out.println("222www");
         String sql = "delete from team where id = ?";
-        return template.update(sql, new Object[] {
-            model.getId()
-        });
+        return template.update(sql, new Object[] {id});
     }
 
     @Override
@@ -73,7 +72,7 @@ public class TeamRepositoryImpl implements TeamRepository{
         String sql = "update team set name=?, status = ?  where id = ?";
         return template.update(sql, new Object[] {
                 model.getName(),
-                model.getStatus(),
+                model.getStatus().name(),
                 model.getId()
         });
     }

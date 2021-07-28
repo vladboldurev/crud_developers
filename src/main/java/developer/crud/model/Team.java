@@ -20,6 +20,11 @@ public class Team extends BaseModel{
     public void setStatus(TeamStatus status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return getId() + " " + getName() + " " + getStatus();
+    }
 }
 
 

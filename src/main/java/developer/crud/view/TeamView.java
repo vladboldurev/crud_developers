@@ -2,6 +2,7 @@ package developer.crud.view;
 
 import developer.crud.controller.TeamController;
 import developer.crud.model.Team;
+import developer.crud.model.TeamStatus;
 
 import java.util.List;
 import java.util.Scanner;
@@ -16,50 +17,85 @@ public class TeamView {
         this.controller = controller;
     }
 
-    public void create(){
+    public void create() {
         System.out.println("###################");
         System.out.println("Input name:");
         String name = scanner.next();
-        controller.create(name);
+        showTeamStatuses();
+        int statusIndex = scanner.nextInt();
+        controller.create(name, statusIndex);
     }
 
-    public void read(){}
+    public void read() {
+        System.out.println("###################");
+        System.out.println("Read team");
+        System.out.println("Input item id for read:");
+        Long statusIndex = scanner.nextLong();
+        Team team = controller.read(statusIndex);
+        if(team != null) {
+            System.out.println(team.toString());
+        } else {
+            System.out.println("item not exist");
+        }
+
+    }
 
     public void readAll(){
         System.out.println("###################");
+        System.out.println("List of teams:");
         List<Team> teams  = controller.readAll();
+        for(Team team: teams) {
+            System.out.println(team.toString());
+        }
     }
 
-    public void update(){}
+    public void update(){
+        System.out.println("###################");
+        System.out.println("Update team:");
+        System.out.println("Input id:");
+        Long id = scanner.nextLong();
+        System.out.println("Input name:");
+        String name = scanner.next();
+        showTeamStatuses();
+        int statusIndex = scanner.nextInt();
+        controller.update(id, name, statusIndex);
 
-    public void delete(){}
+    }
 
-    public void handle(){
+    public void delete(){
+        System.out.println("###################");
+        System.out.println("Delete team:");
+        readAll();
+        System.out.println("Input item id for delete:");
+        Long statusIndex = scanner.nextLong();
+        controller.delete(statusIndex);
+    }
+
+    private void showTeamStatuses() {
+        System.out.println("Choose number of status:");
+        System.out.println(TeamStatus.toStringTeamStatuses());
+    }
+
+    public void show(){
         showMenu();
         String operation = scanner.next();
         switch(operation) {
             case "1":
-                System.out.println("Create team");
                 create();
                 break;
             case "2":
-                System.out.println("Update team");
                 update();
                 break;
             case "3":
-                System.out.println("Read team");
                 read();
                 break;
             case "4":
-                System.out.println("Read all teams");
                 readAll();
                 break;
             case "5":
-                System.out.println("Delete team");
                 delete();
                 break;
             case "6":
-                System.out.println("Exit to the main menu");
                 break;
             default:
                 System.out.println("Operation not valid");

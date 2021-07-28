@@ -10,7 +10,7 @@ public interface GenericRepository<T, ID> {
 
     int create(T item) throws Exception;
 
-    int delete(T item) throws Exception;
+    int delete(Long id) throws Exception;
 
     int update(T item) throws Exception;
 

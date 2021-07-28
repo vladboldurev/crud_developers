@@ -31,7 +31,7 @@ public class CrudConsole {
             String operation = scanner.next();
             switch(operation) {
                 case "1":
-                    teamView.handle();
+                    teamView.show();
                     break;
                 case "2":
                     System.out.println("2");

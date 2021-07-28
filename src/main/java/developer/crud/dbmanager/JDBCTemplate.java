@@ -25,6 +25,7 @@ public class JDBCTemplate<T> {
     private void setParameters(PreparedStatement statement, Object[] params) throws Exception {
         int i = 1;
         for(Object param: params){
+            System.out.println(i);
             statement.setObject(i, param);
             i++;
         }
@@ -39,6 +40,7 @@ public class JDBCTemplate<T> {
         if(result.next()) {
             row = mapper.mapRow(result);
         }
+        connection.close();
         return row;
     }
 

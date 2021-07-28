@@ -1,10 +1,13 @@
 package developer.crud.service;
 
 import developer.crud.model.Team;
+import developer.crud.model.TeamStatus;
 import developer.crud.repository.TeamRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TeamService {
 
@@ -15,24 +18,54 @@ public class TeamService {
     }
 
     public Team read(Long id) {
-        return repository.findById(id);
+        try {
+            return repository.findById(id);
+        } catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 
     public List<Team> readAll() {
-        System.out.printf("service readAll ");
-        return new ArrayList<>();
+        try {
+            return repository.findAll();
+        } catch(Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return new ArrayList<Team>();
     }
 
     public int delete(Long id) {
-
+        try {
+            return repository.delete(id);
+        } catch(Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
     }
 
-    public int update(Long id, String name) {
-
+    public int update(Long id, String name, int statusIndex) {
+        try {
+            Team team = new Team();
+            team.setId(id);
+            team.setName(name);
+            team.setStatus(TeamStatus.getTeamStatusByIndex(statusIndex));
+            return repository.update(team);
+        } catch(Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
     }
 
-    public int create(String name) {
-        System.out.printf("service create name: %s%n", name);
+    public int create(String name, int statusIndex) {
+        try {
+            Team team = new Team();
+            team.setName(name);
+            team.setStatus(TeamStatus.getTeamStatusByIndex(statusIndex));
+            return repository.create(team);
+        } catch(Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
     }
-
 }
