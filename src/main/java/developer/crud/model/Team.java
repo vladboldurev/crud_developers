@@ -5,6 +5,13 @@ public class Team extends BaseModel{
 
     private TeamStatus status;
 
+    public Team() {}
+
+    public Team(String name, TeamStatus status) {
+        this.name = name;
+        this.status = status;
+    }
+
     public String getName() {
         return name;
     }
@@ -17,9 +24,7 @@ public class Team extends BaseModel{
         this.name = name;
     }
 
-    public void setStatus(TeamStatus status) {
-        this.status = status;
-    }
+    public void setStatus(TeamStatus status) { this.status = status; }
 
     @Override
     public String toString() {

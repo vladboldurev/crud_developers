@@ -5,9 +5,7 @@ import developer.crud.model.TeamStatus;
 import developer.crud.repository.TeamRepository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TeamService {
 
@@ -62,7 +60,10 @@ public class TeamService {
             Team team = new Team();
             team.setName(name);
             team.setStatus(TeamStatus.getTeamStatusByIndex(statusIndex));
-            return repository.create(team);
+            int result = repository.create(team);
+            System.out.println("result:" + result);
+            return result;
+//            return repository.create(team);
         } catch(Exception ex) {
             System.out.println(ex.getMessage());
         }
